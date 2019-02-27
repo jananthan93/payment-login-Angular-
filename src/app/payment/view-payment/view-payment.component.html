@@ -1,0 +1,20 @@
+<div class="card-body">
+    <div class="mat-elevation-z8">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Date of payment</th>
+            <th>Amount :</th>
+            <th>Invoice No:</th>
+            <th>Training Date</th>
+          </tr>
+          <tr *ngFor="let payment of paymentsList">
+            <td>{{payment.dateOfPayment}}</td>
+            <td>{{payment.amount}}</td>
+            <td>{{payment.invoiceNo}}</td>
+            <td>{{payment.trainingSchedule.date}}</td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>

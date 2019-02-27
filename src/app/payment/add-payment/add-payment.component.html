@@ -1,0 +1,67 @@
+
+
+<div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <!-- card header start -->
+        <div class="card-header">
+          <h5 class="card-title">Add Payment </h5>
+        </div>
+        <!-- card-header end -->
+        <!-- card body start -->
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card card-primary">
+                <!-- form start -->
+                <form>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="date">Date of Payment</label>
+                          <input type="date" placeholder="yyyy-mm-dd" class="form-control" id="date" name="date"[(ngModel)]="paymentObj.dateOfPayment">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="amount">Amount</label>
+                          <input type="number" class="form-control" id="amount" name="amount"[(ngModel)]="paymentObj.amount">
+                        </div>
+                      </div>
+                    </div>
+                   
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="topic">Invoice No: </label>
+                          <input type="text" placeholder="Training Topic" class="form-control" id="invoice" name="invoice"[(ngModel)]="paymentObj.invoiceNo">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                          <div class="form-group">
+                            <label for="topic">Trainer Schedule: </label>
+                            <input type="text" placeholder="Training Topic" class="form-control" id="schedule" name="schedule"[(ngModel)]="paymentObj.trainingSchedule">
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="button" class="btn btn-primary"  (click)="createPaymentInitiate()">Add</button>
+                    &nbsp;
+                  </div>
+                </form>
+                <!-- form end -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- card body end -->
+      </div>
+    </div>
+  </div>
+  
+  
+  
+  
+  

@@ -1,0 +1,40 @@
+<ng-container *ngIf="info.token; else loggedOut">
+  <div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="tab" role="tabpanel">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" routerLinkActive="active"><a class="active" routerLink="hr" aria-controls="home" role="tab" data-toggle="tab" *ngIf="this.role=='HR'">Hr</a></li>
+                    <li role="presentation" routerLinkActive="active"><a class="active" routerLink="trainer" aria-controls="home" role="tab" data-toggle="tab"*ngIf="this.role=='TRAINER'">Trainer</a></li>
+                    <li role="presentation" routerLinkActive="active"><a class="active" routerLink="accountant" aria-controls="home" role="tab" data-toggle="tab"*ngIf="this.role=='ACCOUNTANT'">Accountant</a></li>
+                    <li role="presentation" routerLinkActive="active"><a class="active" routerLink="paymentInitiate" aria-controls="home" role="tab" data-toggle="tab" *ngIf="this.role=='HR' || this.role=='TRAINER'">Payment Initiation</a></li>                                    
+                    <!-- <li role="presentation" routerLinkActive="active"><a class="active" routerLink="payment" aria-controls="home" role="tab" data-toggle="tab">Payment</a></li>                   -->
+                    <li role="presentation" routerLinkActive="active"><a class="active" routerLink="" aria-controls="home" role="tab" data-toggle="tab" (click)="logout()">Logout</a></li>                  
+                </ul>
+                <br>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+  </div>
+</ng-container>
+<app-login *ngIf="!isLoggedIn"></app-login>
+
+<!-- 
+<div class="col-md-6">
+  <app-add-payment-initiation></app-add-payment-initiation>
+</div>
+<div class="col-md-6">
+  <app-view-payment-initiation></app-view-payment-initiation>
+
+</div> -->
+
+<!-- <div class="col-md-6">
+    <app-add-payment></app-add-payment>
+  </div>
+  <div class="col-md-6">
+   <app-view-payment></app-view-payment>
+  
+  </div> -->
+<router-outlet></router-outlet>

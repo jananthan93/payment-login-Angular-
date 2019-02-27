@@ -1,0 +1,146 @@
+<div class="col-md-10">
+    <div class="card-body">
+        <div class="mat-elevation-z8">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Date of Training</th>
+                <th>Total covered hours</th>
+                <th>Amount to be Paid:</th>
+                <th>Training Topic </th>
+                <th>Payment Status</th>
+                <th>trainer</th>
+                <!-- <th></th> -->
+              </tr>
+              <tr *ngFor="let paymentInitiate of paymentInitiates">
+                <td>{{paymentInitiate.date | date:"dd:MM:yyyy"}}</td>
+                <td>{{paymentInitiate.totalCoveredhours}}</td>
+                <td>{{paymentInitiate.amounToPaid}}</td>
+                <td>{{paymentInitiate.trainingTopic}}</td>
+                <td>{{paymentInitiate.status}}</td>
+                <td>{{paymentInitiate.trainer.name}}</td>
+
+                <td *ngIf="paymentInitiate.status=='INITIATED' &&  this.role=='HR'">
+                    <button type="button" class="btn btn-primary" (click)="processPayment(paymentInitiate)">Forward..</button>
+                  </td>
+                    <td *ngIf="paymentInitiate.status=='DEPOSITED'&& this.role=='TRAINER'">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentInit" (click)="getObject(paymentInitiate)">
+                        Confirm..
+                      </button>
+                      <!-- <button type="button" class="btn btn-primary" (click)="completePayment(paymentInitiate)">Confirm..</button> -->
+                    </td>
+                    <td *ngIf="paymentInitiate.status=='PROCESSED' && this.role=='ACCOUNTANT'">
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#payment" (click)="onclickgetTraining(paymentInitiate.id)">
+                        Payment..
+                      </button>
+                      </td>
+                      <td *ngIf="paymentInitiate.status=='RECHECK' &&  this.role=='ACCOUNTANT'">
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#paymentInit" (click)="getObject(paymentInitiate)" >Check..</button>
+                      </td>
+              </tr>
+            </thead>
+          </table>
+        </div>
+      </div>
+</div>
+ <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="payment" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                  <label for="date">Date of Payment</label>
+                  <input type="date" placeholder="yyyy-mm-dd" class="form-control" id="date" name="date"[(ngModel)]="paymentObj.dateOfPayment">
+                </div>
+          </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="amount">Amount</label>
+                  <input type="number" class="form-control" id="amount" name="amount"[(ngModel)]="paymentObj.amount">
+                </div>
+              </div>
+            
+           
+           
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="topic">Invoice No: </label>
+                  <input type="text" placeholder="Training Topic" class="form-control" id="invoice" name="invoice"[(ngModel)]="paymentObj.invoiceNo">
+                </div>
+              </div>
+              <!-- <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="topic">Trainer Schedule: </label>
+                    <input type="text" placeholder="Training Topic" class="form-control" id="schedule" name="schedule"[(ngModel)]="paymentObj.trainingSchedule">
+                  </div>
+                </div> -->
+           
+        </div>
+         
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createPaymentInitiate(paymentInitiate)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="paymentInit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Payment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+        <div class="col-md-6">
+          Date of payment:
+        </div>
+        <div class="col-md-6">
+          {{payment.dateOfPayment | date:"dd:MM:yyyy"}}
+        </div>
+        <div class="col-md-6">
+          Amount :
+        </div>
+        <div class="col-md-6">
+          {{payment.amount}}
+        </div>
+        <div class="col-md-6">
+            Invoice No:
+        </div>
+        <div class="col-md-6">
+          {{payment.invoiceNo}}
+        </div>
+        <div class="col-md-6">
+            Training Date:
+        </div>
+          {{payment.trainingSchedule.date | date:"dd:MM:yyyy"}}
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"(click)="recheckPayment(paymentInitiate)" >NO</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="completePayment(paymentInitiate)">YES</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="completePayment(paymentInitiate)" >Update</button>
+      </div>
+    </div>
+  </div>
+</div>
